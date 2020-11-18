@@ -12,9 +12,10 @@
           <input type="checkbox" id="checkbox" class="checkbox" v-model="selectAll">
           <label for="checkbox">{{this.field.messageSelectAll}}</label>
         </div>
-<!--          <label v-if="this.field.selectAll"><input type="checkbox" class="checkbox mb-2 mr-2">{{this.field.messageSelectAll}}</label>-->
-          <multi-select ref="multiselect" @open="() => repositionDropdown(true)" :options="options"
-                        v-bind="multiSelectProps" v-model="value"/>
+          <multi-select :class='Object.keys(this.errors.errors).length !== 0 && this.errors.errors.permissions !== undefined ? "border-danger": ""' ref="multiselect" @open="() => repositionDropdown(true)" :options="options" v-bind="multiSelectProps" v-model="value"/>
+          <div class="help-text error-text mt-2 text-danger" v-if="Object.keys(this.errors.errors).length !== 0 && this.errors.errors.permissions !== undefined">
+              {{ this.errors.errors.permissions[0] }}
+          </div>
       </div>
     </template>
   </default-field>
